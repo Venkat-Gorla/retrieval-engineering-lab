@@ -4,6 +4,11 @@ from aws_cdk import (
 )
 from constructs import Construct
 
+PROJECT_NAME = "retrieval-lab"
+EXPERIMENT_NAME = "cost-study"
+
+collection_name = f"{PROJECT_NAME}-{EXPERIMENT_NAME}"
+
 
 class OpenSearchServerlessCostStack(Stack):
     def __init__(
@@ -14,9 +19,21 @@ class OpenSearchServerlessCostStack(Stack):
     ) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        collection_name = "cost-study"
+        encryption_policy = self._create_encryption_policy()
+        network_policy = self._create_network_policy()
 
-        encryption_policy = aoss.CfnSecurityPolicy(
+        collection = aoss.CfnCollection(
+            self,
+            "Collection",
+            name=collection_name,
+            type="VECTORSEARCH",
+        )
+
+        collection.add_dependency(encryption_policy)
+        collection.add_dependency(network_policy)
+
+    def _create_encryption_policy(self) -> aoss.CfnSecurityPolicy:
+        return aoss.CfnSecurityPolicy(
             self,
             "EncryptionPolicy",
             name="cost-study-encryption",
@@ -36,7 +53,8 @@ class OpenSearchServerlessCostStack(Stack):
             """,
         )
 
-        network_policy = aoss.CfnSecurityPolicy(
+    def _create_network_policy(self) -> aoss.CfnSecurityPolicy:
+        return aoss.CfnSecurityPolicy(
             self,
             "NetworkPolicy",
             name="cost-study-network",
@@ -57,13 +75,3 @@ class OpenSearchServerlessCostStack(Stack):
             ]
             """,
         )
-
-        collection = aoss.CfnCollection(
-            self,
-            "Collection",
-            name=collection_name,
-            type="VECTORSEARCH",
-        )
-
-        collection.add_dependency(encryption_policy)
-        collection.add_dependency(network_policy)
