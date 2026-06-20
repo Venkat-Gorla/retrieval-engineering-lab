@@ -1,3 +1,4 @@
+import json
 from aws_cdk import (
     Stack,
     aws_opensearchserverless as aoss,
@@ -33,45 +34,45 @@ class OpenSearchServerlessCostStack(Stack):
         collection.add_dependency(network_policy)
 
     def _create_encryption_policy(self) -> aoss.CfnSecurityPolicy:
+        encryption_policy_document = {
+            "Rules": [
+                {
+                    "ResourceType": "collection",
+                    "Resource": [
+                        f"collection/{collection_name}",
+                    ],
+                }
+            ],
+            "AWSOwnedKey": True,
+        }
+
         return aoss.CfnSecurityPolicy(
             self,
             "EncryptionPolicy",
-            name="cost-study-encryption",
+            name=f"{collection_name}-encryption",
             type="encryption",
-            policy="""
-            {
-              "Rules": [
-                {
-                  "ResourceType": "collection",
-                  "Resource": [
-                    "collection/cost-study"
-                  ]
-                }
-              ],
-              "AWSOwnedKey": true
-            }
-            """,
+            policy=json.dumps(encryption_policy_document),
         )
 
     def _create_network_policy(self) -> aoss.CfnSecurityPolicy:
+        network_policy_document = [
+            {
+                "Rules": [
+                    {
+                        "ResourceType": "collection",
+                        "Resource": [
+                            f"collection/{collection_name}",
+                        ],
+                    }
+                ],
+                "AllowFromPublic": True,
+            }
+        ]
+
         return aoss.CfnSecurityPolicy(
             self,
             "NetworkPolicy",
-            name="cost-study-network",
+            name=f"{collection_name}-network",
             type="network",
-            policy="""
-            [
-              {
-                "Rules": [
-                  {
-                    "ResourceType": "collection",
-                    "Resource": [
-                      "collection/cost-study"
-                    ]
-                  }
-                ],
-                "AllowFromPublic": true
-              }
-            ]
-            """,
+            policy=json.dumps(network_policy_document),
         )
