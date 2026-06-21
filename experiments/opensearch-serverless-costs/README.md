@@ -20,3 +20,9 @@ This experiment focuses on understanding:
 ## Expected Outcome
 
 A documented understanding of the baseline cost profile of OpenSearch Serverless, helping inform architecture and technology decisions for future experiments in this lab.
+
+## Finding
+
+A standard OpenSearch Serverless VECTORSEARCH collection in ap-south-1 incurred approximately $7.42/day while idle.
+
+This deployment did not use NextGen collection groups and therefore did not qualify for scale-to-zero behavior.
