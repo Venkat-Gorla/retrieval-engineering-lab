@@ -5,27 +5,26 @@ from similarity import cosine_similarity
 MODEL_ID = "amazon.titan-embed-text-v2:0"
 
 
-def find_best_match(
+def rank_documents(
     client,
     question: str,
     documents: list[str],
-) -> tuple[str, float]:
+) -> list[tuple[str, float]]:
     question_embedding = get_embedding(client, MODEL_ID, question)
-
-    best_document = ""
-    best_score = -1.0
+    results = []
 
     for document in documents:
         document_embedding = get_embedding(client, MODEL_ID, document)
         score = cosine_similarity(question_embedding, document_embedding)
 
-        print(f"{score:.4f} | {document}")
+        results.append((document, score))
 
-        if score > best_score:
-            best_score = score
-            best_document = document
+    results.sort(
+        key=lambda item: item[1],
+        reverse=True,
+    )
 
-    return best_document, best_score
+    return results
 
 
 def main() -> None:
@@ -39,20 +38,14 @@ def main() -> None:
     ]
 
     question = "Which AWS service stores files?"
-
-    best_document, best_score = find_best_match(
-        client,
-        question,
-        documents,
-    )
+    results = rank_documents(client, question, documents)
 
     print("\nQuestion:")
     print(question)
 
-    print("\nBest Match:")
-    print(best_document)
-
-    print(f"\nScore: {best_score:.4f}")
+    print("\nResults:")
+    for document, score in results:
+        print(f"{score:.4f} | {document}")
 
 
 if __name__ == "__main__":
