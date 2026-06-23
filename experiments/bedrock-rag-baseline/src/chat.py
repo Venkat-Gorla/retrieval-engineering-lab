@@ -11,7 +11,11 @@ def main() -> None:
 
     client = session.client("bedrock-runtime")
 
-    prompt = "What is Retrieval-Augmented Generation (RAG)? Give a concise answer."
+    prompt = input("\nQuestion: ").strip()
+    prompt = (
+        "Answer in 3-5 concise sentences.\n\n"
+        f"{prompt}"
+    )
 
     response = client.invoke_model(
         modelId=MODEL_ID,
