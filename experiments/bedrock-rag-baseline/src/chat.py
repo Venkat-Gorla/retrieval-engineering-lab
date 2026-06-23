@@ -1,4 +1,5 @@
 import json
+import time
 import boto3
 
 MODEL_ID = "apac.amazon.nova-lite-v1:0"
@@ -16,6 +17,8 @@ def main() -> None:
         "Answer in 3-5 concise sentences.\n\n"
         f"{user_question}"
     )
+
+    start = time.perf_counter()
 
     response = client.invoke_model(
         modelId=MODEL_ID,
@@ -35,12 +38,12 @@ def main() -> None:
         ),
     )
 
-    response_body = json.loads(
-        response["body"].read()
-    )
+    latency = time.perf_counter() - start
 
+    response_body = json.loads(response["body"].read())
     answer = response_body["output"]["message"]["content"][0]["text"]
 
+    print(f"\nLatency: {latency:.2f}s")
     print("\nAnswer:")
     print(answer)
 
