@@ -1,23 +1,8 @@
-import json
 from math import sqrt
 import boto3
+from embeddings import get_embedding
 
 MODEL_ID = "amazon.titan-embed-text-v2:0"
-
-
-def get_embedding(client, model_id: str, text: str) -> list[float]:
-    response = client.invoke_model(
-        modelId=model_id,
-        body=json.dumps(
-            {
-                "inputText": text,
-            }
-        ),
-    )
-
-    response_body = json.loads(response["body"].read())
-
-    return response_body["embedding"]
 
 
 def cosine_similarity(
