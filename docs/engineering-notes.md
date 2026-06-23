@@ -27,5 +27,26 @@ Measured end-to-end Bedrock Nova Lite invocation latency from local workstation 
 
 Observed latency: ~0.96 seconds
 
-Conclusion:
+**Conclusion:**
 Interactive response times are suitable for CLI-based AI applications without additional optimization.
+
+## 2026-06-23
+
+Validated semantic similarity using Titan Text Embeddings V2.
+
+**Results:**
+
+Similarity(
+"DynamoDB is a NoSQL database",
+"DynamoDB stores key-value data"
+) = 0.8513
+
+Similarity(
+"DynamoDB is a NoSQL database",
+"Pizza is a popular Italian food"
+) = 0.0747
+
+**Conclusion:**
+
+Embedding vectors preserve semantic meaning.
+Cosine similarity can distinguish related and unrelated concepts, forming the basis of retrieval systems and vector search.
