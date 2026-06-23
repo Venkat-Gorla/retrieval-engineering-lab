@@ -11,10 +11,10 @@ def main() -> None:
 
     client = session.client("bedrock-runtime")
 
-    prompt = input("\nQuestion: ").strip()
+    user_question = input("\nQuestion: ").strip()
     prompt = (
         "Answer in 3-5 concise sentences.\n\n"
-        f"{prompt}"
+        f"{user_question}"
     )
 
     response = client.invoke_model(
@@ -40,9 +40,6 @@ def main() -> None:
     )
 
     answer = response_body["output"]["message"]["content"][0]["text"]
-
-    print("\nQuestion:")
-    print(prompt)
 
     print("\nAnswer:")
     print(answer)
