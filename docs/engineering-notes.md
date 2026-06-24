@@ -50,3 +50,25 @@ Similarity(
 
 Embedding vectors preserve semantic meaning.
 Cosine similarity can distinguish related and unrelated concepts, forming the basis of retrieval systems and vector search.
+
+## 2026-06-24
+
+Implemented a minimal Retrieval-Augmented Generation (RAG) pipeline.
+
+**Flow:**
+
+1. Generate embeddings for documents.
+2. Store document embeddings in an in-memory index.
+3. Generate an embedding for the user question.
+4. Rank documents using cosine similarity.
+5. Retrieve the highest-scoring document.
+6. Provide retrieved context to Amazon Nova Lite.
+7. Generate an answer constrained to the retrieved context.
+
+**Observation:**
+
+The model answered using the retrieved document rather than relying solely on foundation model knowledge.
+
+**Conclusion:**
+
+Validated the core RAG architecture without introducing a vector database.
