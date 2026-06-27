@@ -1,31 +1,35 @@
 """
 uv run src/chunking.py
 """
-import boto3
-
-from common.embeddings import get_embedding
-
-MODEL_ID = "amazon.titan-embed-text-v2:0"
 
 
-def main() -> None:
-    session = boto3.Session()
+def split_into_chunks(text: str) -> list[str]:
+    return [
+        chunk.strip()
+        for chunk in text.split("\n\n")
+        if chunk.strip()
+    ]
 
-    print(f"AWS Profile: {session.profile_name}")
-    print(f"AWS Region : {session.region_name}")
 
-    client = session.client("bedrock-runtime")
+def main():
+    document = """
+    Amazon DynamoDB is a NoSQL database service.
 
-    text = "Amazon S3 is an object storage service."
+    Amazon S3 is an object storage service.
 
-    embedding = get_embedding(
-        client,
-        MODEL_ID,
-        text,
-    )
+    AWS Lambda runs serverless functions.
 
-    print(f"\nInput Text: {text}")
-    print(f"Vector Dimensions: {len(embedding)}")
+    Amazon Bedrock provides access to foundation models.
+    """
+
+    chunks = split_into_chunks(document)
+
+    print(f"Chunks: {len(chunks)}\n")
+
+    for index, chunk in enumerate(chunks, start=1):
+        print(f"Chunk {index}:")
+        print(chunk)
+        print()
 
 
 if __name__ == "__main__":
