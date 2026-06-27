@@ -25,11 +25,22 @@ def split_into_fixed_chunks(
     chunk_size: int,
 ) -> list[str]:
     text = text.strip()
+    chunks = []
 
-    return [
-        text[i:i + chunk_size]
-        for i in range(0, len(text), chunk_size)
-    ]
+    while text:
+        if len(text) <= chunk_size:
+            chunks.append(text)
+            break
+
+        split_at = text.rfind(" ", 0, chunk_size)
+
+        if split_at == -1:
+            split_at = chunk_size
+
+        chunks.append(text[:split_at].strip())
+        text = text[split_at:].strip()
+
+    return chunks
 
 
 def print_chunks(title: str, chunks: list[str]) -> None:
