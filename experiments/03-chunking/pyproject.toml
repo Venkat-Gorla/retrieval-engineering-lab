@@ -1,0 +1,12 @@
+[project]
+name = "03-chunking"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "boto3>=1.43.36",
+    "common",
+]
+
+[tool.uv.sources]
+common = { path = "../../common", editable = true }
