@@ -23,22 +23,27 @@ def split_into_chunks(text: str) -> list[str]:
 def split_into_fixed_chunks(
     text: str,
     chunk_size: int,
+    overlap: int = 0,
 ) -> list[str]:
     text = text.strip()
     chunks = []
+    start = 0
 
-    while text:
-        if len(text) <= chunk_size:
-            chunks.append(text)
+    while start < len(text):
+        end = min(start + chunk_size, len(text))
+
+        if end < len(text):
+            split_at = text.rfind(" ", start, end)
+
+            if split_at != -1:
+                end = split_at
+
+        chunks.append(text[start:end].strip())
+
+        if end == len(text):
             break
 
-        split_at = text.rfind(" ", 0, chunk_size)
-
-        if split_at == -1:
-            split_at = chunk_size
-
-        chunks.append(text[:split_at].strip())
-        text = text[split_at:].strip()
+        start = max(end - overlap, 0)
 
     return chunks
 
@@ -74,10 +79,17 @@ def main():
 
     paragraph_chunks = split_into_chunks(document)
     fixed_chunks = split_into_fixed_chunks(document, chunk_size=80)
+    overlap_chunks = split_into_fixed_chunks(
+        document,
+        chunk_size=80,
+        overlap=20,
+    )
 
     print(f"\nParagraph Chunks: {len(paragraph_chunks)}")
     print(f"Fixed Chunks    : {len(fixed_chunks)}")
-    print_chunks("Fixed-Size Chunking", fixed_chunks,)
+    print(f"Overlap Chunks  : {len(overlap_chunks)}")
+    print_chunks("---Fixed-Size Chunking---", fixed_chunks)
+    print_chunks("---Overlap Chunking---", overlap_chunks)
 
     # chunk_index = build_embedding_index(client, MODEL_ID, paragraph_chunks)
     # whole_document_index = build_embedding_index(client, MODEL_ID, [document])

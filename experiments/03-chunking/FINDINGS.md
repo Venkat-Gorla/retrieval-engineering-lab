@@ -20,9 +20,25 @@ Observations:
 - For small documents, both approaches identified the correct information.
 - Chunk retrieval is expected to provide greater benefits as document size increases.
 
+### Fixed-Size Chunking
+
+Observations:
+
+- Splitting by a fixed character count can divide sentences across chunk boundaries.
+- Naive character-based chunking may also split words, reducing readability.
+- Preserving word boundaries produces cleaner and more coherent chunks.
+
+### Overlap Chunking
+
+Observations:
+
+- Overlap repeats a portion of text between adjacent chunks.
+- Repeated context helps reduce information loss near chunk boundaries.
+- Combining overlap with word-boundary preservation increases implementation complexity.
+
 ### Next Steps
 
-- Compare different chunk sizes.
-- Add chunk overlap.
+- Evaluate retrieval quality using overlapping chunks.
 - Test retrieval on longer documents.
+- Compare different chunk sizes.
 - Measure prompt size and token usage.
