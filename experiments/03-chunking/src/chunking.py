@@ -3,6 +3,10 @@ uv run src/chunking.py
 """
 import boto3
 from common.embeddings import get_embedding
+from common.retrieval import (
+    build_embedding_index,
+    rank_embeddings,
+)
 
 MODEL_ID = "amazon.titan-embed-text-v2:0"
 
@@ -13,27 +17,6 @@ def split_into_chunks(text: str) -> list[str]:
         for chunk in text.split("\n\n")
         if chunk.strip()
     ]
-
-
-def build_chunk_index(
-    client,
-    model_id: str,
-    chunks: list[str],
-) -> list[tuple[str, list[float]]]:
-    chunk_index = []
-
-    for chunk in chunks:
-        embedding = get_embedding(
-            client,
-            model_id,
-            chunk,
-        )
-
-        chunk_index.append(
-            (chunk, embedding)
-        )
-
-    return chunk_index
 
 
 def main():
@@ -53,13 +36,18 @@ def main():
     """
 
     chunks = split_into_chunks(document)
-    chunk_index = build_chunk_index(
-        client,
-        MODEL_ID,
-        chunks,
-    )
+    chunk_index = build_embedding_index(client, MODEL_ID, chunks)
 
-    print(f"Indexed {len(chunk_index)} chunks")
+    question = "Which AWS service stores files?"
+    query_embedding = get_embedding(client, MODEL_ID, question,)
+
+    results = rank_embeddings(query_embedding, chunk_index,)
+
+    print("\nQuestion:")
+    print(question)
+    print("\nResults:")
+    for chunk, score in results:
+        print(f"{score:.4f} | {chunk}")
 
 
 if __name__ == "__main__":
