@@ -1,6 +1,10 @@
 """
 uv run src/chunking.py
 """
+import boto3
+from common.embeddings import get_embedding
+
+MODEL_ID = "amazon.titan-embed-text-v2:0"
 
 
 def split_into_chunks(text: str) -> list[str]:
@@ -11,7 +15,33 @@ def split_into_chunks(text: str) -> list[str]:
     ]
 
 
+def build_chunk_index(
+    client,
+    model_id: str,
+    chunks: list[str],
+) -> list[tuple[str, list[float]]]:
+    chunk_index = []
+
+    for chunk in chunks:
+        embedding = get_embedding(
+            client,
+            model_id,
+            chunk,
+        )
+
+        chunk_index.append(
+            (chunk, embedding)
+        )
+
+    return chunk_index
+
+
 def main():
+    session = boto3.Session()
+    client = session.client("bedrock-runtime")
+    print(f"AWS Profile: {session.profile_name}")
+    print(f"AWS Region : {session.region_name}")
+
     document = """
     Amazon DynamoDB is a NoSQL database service.
 
@@ -23,13 +53,13 @@ def main():
     """
 
     chunks = split_into_chunks(document)
+    chunk_index = build_chunk_index(
+        client,
+        MODEL_ID,
+        chunks,
+    )
 
-    print(f"Chunks: {len(chunks)}\n")
-
-    for index, chunk in enumerate(chunks, start=1):
-        print(f"Chunk {index}:")
-        print(chunk)
-        print()
+    print(f"Indexed {len(chunk_index)} chunks")
 
 
 if __name__ == "__main__":
