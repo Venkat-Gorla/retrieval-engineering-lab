@@ -19,6 +19,11 @@ def split_into_chunks(text: str) -> list[str]:
     ]
 
 
+def print_ranked_results(results: list[tuple[str, float]]):
+    for chunk, score in results:
+        print(f"{score:.4f} | {chunk}")
+
+
 def main():
     session = boto3.Session()
     client = session.client("bedrock-runtime")
@@ -37,17 +42,21 @@ def main():
 
     chunks = split_into_chunks(document)
     chunk_index = build_embedding_index(client, MODEL_ID, chunks)
+    whole_document_index = build_embedding_index(client, MODEL_ID, [document])
 
     question = "Which AWS service stores files?"
     query_embedding = get_embedding(client, MODEL_ID, question,)
 
-    results = rank_embeddings(query_embedding, chunk_index,)
+    chunk_results = rank_embeddings(query_embedding, chunk_index,)
+    document_results = rank_embeddings(query_embedding, whole_document_index,)
 
     print("\nQuestion:")
     print(question)
-    print("\nResults:")
-    for chunk, score in results:
-        print(f"{score:.4f} | {chunk}")
+    print("\nWhole Document Retrieval:")
+    print_ranked_results(document_results)
+
+    print("\nChunk Retrieval:")
+    print_ranked_results(chunk_results)
 
 
 if __name__ == "__main__":
