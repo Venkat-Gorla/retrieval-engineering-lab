@@ -15,10 +15,6 @@ Understand common document chunking strategies and evaluate their effect on sema
 - Overlapping chunking
 - Retrieval comparison across chunking strategies
 
-## Result
-
-Implemented and compared paragraph, fixed-size, and overlapping chunking strategies, and evaluated their impact on retrieval.
-
 ## Key Takeaways
 
 - Chunking is a critical step in a RAG pipeline.
