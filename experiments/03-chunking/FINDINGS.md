@@ -36,9 +36,25 @@ Observations:
 - Repeated context helps reduce information loss near chunk boundaries.
 - Combining overlap with word-boundary preservation increases implementation complexity.
 
-### Next Steps
+## 2026-07-01
 
-- Evaluate retrieval quality using overlapping chunks.
+### Chunking Strategy Comparison
+
+Question:
+
+> Which AWS service stores files?
+
+Observations:
+
+- Paragraph chunking produced the highest similarity score in this experiment.
+- Each paragraph contained a single topic, resulting in a semantically coherent embedding.
+- Fixed-size chunking grouped multiple topics into a single chunk, reducing retrieval precision.
+- Overlap chunking preserved additional context near chunk boundaries but also produced chunks containing multiple topics.
+- The effectiveness of a chunking strategy depends on the structure of the source document.
+
+### Future Exploration
+
 - Test retrieval on longer documents.
 - Compare different chunk sizes.
 - Measure prompt size and token usage.
+- Experiment with sentence-aware chunking.
