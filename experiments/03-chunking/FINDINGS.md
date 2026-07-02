@@ -50,7 +50,7 @@ Observations:
 - Each paragraph contained a single topic, resulting in a semantically coherent embedding.
 - Fixed-size chunking grouped multiple topics into a single chunk, reducing retrieval precision.
 - Overlap chunking preserved additional context near chunk boundaries but also produced chunks containing multiple topics.
-- The effectiveness of a chunking strategy depends on the structure of the source document.
+- The effectiveness of a chunking strategy depends on the **structure of the source document**.
 
 ### Future Exploration
 
