@@ -67,6 +67,13 @@ def main() -> None:
         ):
             correct_count += 1
 
+    print("\n" + "-" * 40)
+    print("\nSummary:")
+    print(f"{correct_count}/{len(evaluation_cases)} passed")
+
+    accuracy = correct_count / len(evaluation_cases)
+    print(f"\nAccuracy@1: {accuracy:.2%}")
+
 
 if __name__ == "__main__":
     main()
