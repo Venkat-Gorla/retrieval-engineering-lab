@@ -21,7 +21,7 @@ def run_evaluation_case(
     client,
     embedding_index: list[tuple[str, list[float]]],
     evaluation_case: dict,
-) -> None:
+) -> bool:
     question = evaluation_case["question"]
     relevant_documents = evaluation_case["relevant_documents"]
 
@@ -29,6 +29,7 @@ def run_evaluation_case(
 
     ranked_results = rank_embeddings(query_embedding, embedding_index)
     top_document = ranked_results[0][0]
+    is_correct = top_document in relevant_documents
 
     print("\n" + "-" * 40)
     print("\nQuestion:")
@@ -41,6 +42,11 @@ def run_evaluation_case(
     print("\nRetrieved:")
     print(top_document)
 
+    print("\nResult:")
+    print("PASS" if is_correct else "FAIL")
+
+    return is_correct
+
 
 def main() -> None:
     session = boto3.Session()
@@ -52,12 +58,14 @@ def main() -> None:
         documents,
     )
 
+    correct_count = 0
     for evaluation_case in evaluation_cases:
-        run_evaluation_case(
+        if run_evaluation_case(
             client,
             embedding_index,
             evaluation_case,
-        )
+        ):
+            correct_count += 1
 
 
 if __name__ == "__main__":
