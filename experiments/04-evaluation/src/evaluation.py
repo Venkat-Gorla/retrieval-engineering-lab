@@ -15,6 +15,7 @@ from datasets.aws_services import (
 )
 
 MODEL_ID = "amazon.titan-embed-text-v2:0"
+TOP_K = 4
 
 
 def run_evaluation_case(
@@ -26,10 +27,23 @@ def run_evaluation_case(
     relevant_documents = evaluation_case["relevant_documents"]
 
     query_embedding = get_embedding(client, MODEL_ID, question)
-
     ranked_results = rank_embeddings(query_embedding, embedding_index)
-    top_document = ranked_results[0][0]
-    is_correct = top_document in relevant_documents
+
+    top_documents = [
+        text
+        for text, _ in ranked_results[:TOP_K]
+    ]
+    is_correct = top_documents[0] in relevant_documents
+
+    relevant_retrieved = len(
+        set(top_documents) & set(relevant_documents)
+    )
+
+    precision = (
+        relevant_retrieved / len(top_documents)
+        if top_documents
+        else 0.0
+    )
 
     print("\n" + "-" * 40)
     print("\nQuestion:")
@@ -40,7 +54,10 @@ def run_evaluation_case(
         print(document)
 
     print("\nRetrieved:")
-    print(top_document)
+    for document in top_documents:
+        print(document)
+
+    print(f"\nPrecision@{TOP_K}: {precision:.2%}")
 
     print("\nResult:")
     print("PASS" if is_correct else "FAIL")
