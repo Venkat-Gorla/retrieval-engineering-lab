@@ -8,7 +8,7 @@ Large documents often contain both relevant and irrelevant information. Sending 
 
 Understand common document chunking strategies and evaluate their effect on semantic retrieval in a Retrieval-Augmented Generation (RAG) pipeline.
 
-## Experiments
+## Experiments Performed
 
 - Paragraph-based chunking
 - Fixed-size chunking (word-aware)

@@ -2,26 +2,19 @@
 
 ## Problem
 
-Retrieval systems require objective measurements to determine whether changes improve or degrade search quality. Without evaluation metrics, retrieval quality cannot be compared reliably.
+Retrieval systems require objective measurements to determine whether changes improve or degrade search quality.
 
 ## Goal
 
 Understand how to evaluate semantic retrieval using a benchmark dataset and standard information retrieval metrics.
 
-## Experiments
+## Experiments Performed
 
 - Build a reusable benchmark dataset
-- Measure retrieval accuracy
-- Measure Precision@K
-- Measure Recall@K
-- Compare retrieval approaches using common metrics
-
-## Result
-
-Work in progress.
+- Measure retrieval quality using Accuracy@1, Precision@K, and Recall@K
 
 ## Key Takeaways
 
 - Evaluation requires a benchmark consisting of documents, questions, and relevant documents.
-- Consistent benchmarks enable objective comparison of different retrieval strategies.
+- A consistent benchmark enables objective comparison as retrieval systems evolve.
 - Metrics provide quantitative evidence to support engineering decisions.
