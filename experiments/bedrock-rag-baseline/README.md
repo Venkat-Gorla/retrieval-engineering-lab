@@ -8,7 +8,7 @@ Modern AI applications often need access to private or domain-specific knowledge
 
 Build a minimal end-to-end RAG implementation using Amazon Bedrock and a local document corpus.
 
-The experiment will focus on understanding the core RAG workflow:
+The implementation follows the core RAG workflow:
 
 1. Document ingestion
 2. Text chunking
@@ -17,15 +17,13 @@ The experiment will focus on understanding the core RAG workflow:
 5. Context retrieval
 6. LLM response generation
 
-## Expected Outcome
+## Outcome
 
 - Working RAG pipeline implemented in Python.
-- Local document corpus used as the knowledge source.
-- Amazon Bedrock used for embeddings and text generation.
-- No vector database or agent framework required.
-- Clear understanding of the retrieval lifecycle before introducing additional infrastructure such as OpenSearch.
+- Deferred vector databases and agent frameworks to later experiments.
+- Established a baseline implementation for subsequent experiments on chunking, evaluation, and OpenSearch.
 
-## Success Criteria
+## Capabilities
 
 - User can ask questions about the document corpus.
 - Relevant document chunks are retrieved.
