@@ -45,6 +45,12 @@ def run_evaluation_case(
         else 0.0
     )
 
+    recall = (
+        relevant_retrieved / len(relevant_documents)
+        if relevant_documents
+        else 0.0
+    )
+
     print("\n" + "-" * 40)
     print("\nQuestion:")
     print(question)
@@ -58,6 +64,7 @@ def run_evaluation_case(
         print(document)
 
     print(f"\nPrecision@{TOP_K}: {precision:.2%}")
+    print(f"Recall@{TOP_K}: {recall:.2%}")
 
     print("\nResult:")
     print("PASS" if is_correct else "FAIL")
