@@ -12,6 +12,12 @@ from aoss import (
 COLLECTION_NAME = "retrieval-lab-cost"
 
 
+def print_header():
+    print("=" * 60)
+    print("OpenSearch Serverless NextGen Diagnostics")
+    print("=" * 60)
+
+
 def print_collection_info(collection):
     print("Collection")
     print("----------")
@@ -44,9 +50,7 @@ def main() -> None:
         collection.group_name,
     )
 
-    print("=" * 60)
-    print("OpenSearch Serverless NextGen Diagnostics")
-    print("=" * 60)
+    print_header()
 
     print()
     print_collection_info(collection)
