@@ -43,25 +43,23 @@ def discover_collection_group(
     """
     Retrieve collection group metadata.
     """
-    response = client.list_collection_groups()
-    groups = response["collectionGroupSummaries"]
+    response = client.batch_get_collection_group(
+        names=[collection_group_name]
+    )
 
-    for group in groups:
-        if group["name"] != collection_group_name:
-            continue
-
-        limits = group["capacityLimits"]
-
-        return CollectionGroupInfo(
-            name=group["name"],
-
-            min_search_ocu=limits["minSearchCapacityInOCU"],
-            max_search_ocu=limits["maxSearchCapacityInOCU"],
-
-            min_indexing_ocu=limits["minIndexingCapacityInOCU"],
-            max_indexing_ocu=limits["maxIndexingCapacityInOCU"],
+    groups = response["collectionGroupDetails"]
+    if not groups:
+        raise RuntimeError(
+            f"Collection group '{collection_group_name}' not found."
         )
 
-    raise RuntimeError(
-        f"Collection group '{collection_group_name}' not found."
+    group = groups[0]
+    limits = group["capacityLimits"]
+
+    return CollectionGroupInfo(
+        name=group["name"],
+        min_search_ocu=limits["minSearchCapacityInOCU"],
+        max_search_ocu=limits["maxSearchCapacityInOCU"],
+        min_indexing_ocu=limits["minIndexingCapacityInOCU"],
+        max_indexing_ocu=limits["maxIndexingCapacityInOCU"],
     )
