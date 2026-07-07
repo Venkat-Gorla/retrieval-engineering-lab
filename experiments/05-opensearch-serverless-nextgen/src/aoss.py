@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import boto3
-from models import CollectionInfo
+from models import CollectionInfo, CollectionGroupInfo
 
 
 def create_client():
@@ -15,7 +15,6 @@ def discover_collection(
     """
     Retrieve collection metadata.
     """
-
     response = client.batch_get_collection(
         names=[collection_name]
     )
@@ -34,4 +33,35 @@ def discover_collection(
         group_name=collection["collectionGroupName"],
         status=collection["status"],
         collection_type=collection["type"],
+    )
+
+
+def discover_collection_group(
+    client,
+    collection_group_name: str,
+) -> CollectionGroupInfo:
+    """
+    Retrieve collection group metadata.
+    """
+    response = client.list_collection_groups()
+    groups = response["collectionGroupSummaries"]
+
+    for group in groups:
+        if group["name"] != collection_group_name:
+            continue
+
+        limits = group["capacityLimits"]
+
+        return CollectionGroupInfo(
+            name=group["name"],
+
+            min_search_ocu=limits["minSearchCapacityInOCU"],
+            max_search_ocu=limits["maxSearchCapacityInOCU"],
+
+            min_indexing_ocu=limits["minIndexingCapacityInOCU"],
+            max_indexing_ocu=limits["maxIndexingCapacityInOCU"],
+        )
+
+    raise RuntimeError(
+        f"Collection group '{collection_group_name}' not found."
     )
