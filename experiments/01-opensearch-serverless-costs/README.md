@@ -23,6 +23,6 @@ A documented understanding of the baseline cost profile of OpenSearch Serverless
 
 ## Finding
 
-A standard OpenSearch Serverless VECTORSEARCH collection in ap-south-1 incurred approximately $7.42/day while idle.
+A standard OpenSearch Serverless VECTORSEARCH collection in ap-south-1 incurred approximately $12.36/day while idle.
 
 This deployment did not use NextGen collection groups and therefore did not qualify for scale-to-zero behavior.

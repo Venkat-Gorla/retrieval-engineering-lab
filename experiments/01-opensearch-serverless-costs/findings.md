@@ -15,7 +15,7 @@ Validate the idle cost of an OpenSearch Serverless VECTORSEARCH collection befor
 
 ## Result
 
-- An idle OpenSearch Serverless VECTORSEARCH collection incurred approximately USD 7.42/day in ap-south-1.
+- An idle OpenSearch Serverless VECTORSEARCH collection incurred approximately USD 12.36/day in ap-south-1.
 
 ## Cost Observations
 
