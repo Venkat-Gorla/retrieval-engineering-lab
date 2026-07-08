@@ -57,7 +57,9 @@ def discover_collection_group(
     limits = group["capacityLimits"]
 
     return CollectionGroupInfo(
+        id=group["id"],
         name=group["name"],
+        generation=group["generation"],
         min_search_ocu=limits["minSearchCapacityInOCU"],
         max_search_ocu=limits["maxSearchCapacityInOCU"],
         min_indexing_ocu=limits["minIndexingCapacityInOCU"],
