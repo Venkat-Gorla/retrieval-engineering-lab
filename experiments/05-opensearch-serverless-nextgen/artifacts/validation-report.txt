@@ -1,0 +1,26 @@
+uv run src/nextgen_diagnostics.py
+
+=========================================
+OpenSearch Serverless NextGen Diagnostics
+=========================================
+
+Collection
+----------
+Name      : retrieval-lab-cost
+Status    : ACTIVE
+Type      : VECTORSEARCH
+Group     : nextgen-retrieval-lab-cost
+
+Collection Group
+----------------
+Name              : nextgen-retrieval-lab-cost
+Generation        : NEXTGEN
+Min Search OCU    : 0.0
+Max Search OCU    : 96.0
+Min Index OCU     : 0.0
+Max Index OCU     : 96.0
+
+Runtime
+-------
+Search OCU        : 0.0
+Indexing OCU      : 0.0

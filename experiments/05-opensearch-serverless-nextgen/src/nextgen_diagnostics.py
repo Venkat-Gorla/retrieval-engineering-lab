@@ -53,7 +53,7 @@ def print_collection_group_info(group):
 
 def print_runtime_info(runtime_info):
     print("Runtime")
-    print("------------")
+    print("-------")
     print(f"Search OCU        : {runtime_info.search_ocu}")
     print(f"Indexing OCU      : {runtime_info.indexing_ocu}")
 
