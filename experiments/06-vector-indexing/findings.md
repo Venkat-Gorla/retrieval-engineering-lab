@@ -5,3 +5,5 @@
 - **2026-07-13** – OpenSearch Serverless does not support the `refresh=true` indexing policy. Documents become searchable through the service-managed refresh mechanism.
 
 - **2026-07-13** – The first document indexing request timed out with the default 10-second client timeout while Index OCU increased from 0.0. Increasing the OpenSearch client timeout to 30 seconds allowed the indexing request to complete successfully.
+
+- **2026-07-13** – After approximately 20 minutes of inactivity, runtime Search OCU and Index OCU both returned to 0.0 on the test OpenSearch Serverless NextGen collection, consistent with scale-to-zero behavior for idle search and indexing compute.
