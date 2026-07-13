@@ -8,7 +8,7 @@ from models import INDEX_MAPPING, INDEX_NAME
 
 
 def main() -> None:
-    host = os["OPENSEARCH_HOST"]
+    host = os.environ["OPENSEARCH_HOST"]
     client = create_client(host)
 
     print(f"Checking if index '{INDEX_NAME}' exists...")

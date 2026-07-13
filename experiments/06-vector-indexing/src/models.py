@@ -1,3 +1,5 @@
+EMBEDDING_MODEL_ID = "amazon.titan-embed-text-v2:0"
+
 EMBEDDING_DIMENSION = 1024
 INDEX_NAME = "rag-documents"
 
