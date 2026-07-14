@@ -1,5 +1,5 @@
 """
-uv run src/search_documents.py
+uv run src/search_sample_document.py
 """
 import os
 import time
@@ -13,6 +13,8 @@ QUERY = "Where are S3 objects stored?"
 
 
 def print_search_results(hits):
+    print(f"\nSearch Query: {QUERY}")
+
     print(f"\nFound {len(hits)} result(s).\n")
 
     for i, hit in enumerate(hits, start=1):
