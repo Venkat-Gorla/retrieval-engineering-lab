@@ -1,4 +1,4 @@
-uv run src/nextgen_diagnostics.py
+> uv run src/nextgen_diagnostics.py
 
 =========================================
 OpenSearch Serverless NextGen Diagnostics
