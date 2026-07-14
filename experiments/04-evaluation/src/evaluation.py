@@ -33,7 +33,7 @@ def run_evaluation_case(
         text
         for text, _ in ranked_results[:TOP_K]
     ]
-    is_correct = top_documents[0] in relevant_documents
+    top1_correct = top_documents[0] in relevant_documents
 
     relevant_retrieved = len(
         set(top_documents) & set(relevant_documents)
@@ -67,19 +67,20 @@ def run_evaluation_case(
     print(f"Recall@{TOP_K}: {recall:.2%}")
 
     print("\nResult:")
-    print("PASS" if is_correct else "FAIL")
+    print("PASS" if top1_correct else "FAIL")
 
-    return is_correct
+    return top1_correct
 
 
 def main() -> None:
     session = boto3.Session()
     client = session.client("bedrock-runtime")
 
+    document_texts = [document["text"] for document in documents]
     embedding_index = build_embedding_index(
         client,
         MODEL_ID,
-        documents,
+        document_texts,
     )
 
     correct_count = 0
