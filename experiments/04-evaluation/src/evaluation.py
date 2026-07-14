@@ -83,20 +83,20 @@ def main() -> None:
         document_texts,
     )
 
-    correct_count = 0
+    top1_correct_count = 0
     for evaluation_case in evaluation_cases:
         if run_evaluation_case(
             client,
             embedding_index,
             evaluation_case,
         ):
-            correct_count += 1
+            top1_correct_count += 1
 
     print("\n" + "-" * 40)
     print("\nSummary:")
-    print(f"{correct_count}/{len(evaluation_cases)} passed")
+    print(f"{top1_correct_count}/{len(evaluation_cases)} passed")
 
-    accuracy = correct_count / len(evaluation_cases)
+    accuracy = top1_correct_count / len(evaluation_cases)
     print(f"\nAccuracy@1: {accuracy:.2%}")
 
 
