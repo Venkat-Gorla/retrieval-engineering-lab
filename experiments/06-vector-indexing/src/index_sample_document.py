@@ -1,5 +1,5 @@
 """
-uv run src/index_document.py
+uv run src/index_sample_document.py
 """
 import os
 from boto3 import Session

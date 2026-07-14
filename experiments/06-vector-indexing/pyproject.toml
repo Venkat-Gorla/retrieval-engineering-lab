@@ -6,7 +6,9 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "common",
+    "datasets",
 ]
 
 [tool.uv.sources]
 common = { path = "../../common", editable = true }
+datasets = { path = "../../datasets", editable = true }
