@@ -4,6 +4,7 @@ Evaluates retrieval quality using the evaluation dataset.
 uv run src/evaluate_dataset.py
 """
 
+from typing import Any
 import os
 
 from boto3 import Session
@@ -54,10 +55,17 @@ def retrieve(
         },
     )
 
-    return [
-        hit["_source"]["id"]
-        for hit in response["hits"]["hits"]
-    ]
+    hits = response["hits"]["hits"]
+    document_ids = []
+
+    for hit in hits:
+        assert (
+            hit["_source"]["source"] == "evaluation"
+        ), "Non-evaluation document returned."
+
+        document_ids.append(hit["_source"]["id"])
+
+    return document_ids
 
 
 def print_documents(
@@ -70,7 +78,7 @@ def print_documents(
         print(DOCUMENTS_BY_ID[document_id]["text"])
 
 
-def print_metrics(metrics: dict[str, any]) -> None:
+def print_metrics(metrics: dict[str, Any]) -> None:
     print("\n" + "-" * 40)
 
     print("\nQuestion:")
