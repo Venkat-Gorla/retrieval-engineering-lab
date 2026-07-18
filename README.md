@@ -18,7 +18,7 @@ While each experiment focuses on a specific topic, together they form an increme
 
 Each lab follows the same general pattern:
 
-**Problem → Goal → Implementation → Validation → Findings → Key Learnings**
+**Problem → Goal → Validation → Learnings**
 
 ## Topics Covered
 
