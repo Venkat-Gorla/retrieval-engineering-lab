@@ -24,11 +24,14 @@ Develop a production-oriented understanding of vector indexing through:
 | **Embedding Model** | Amazon Titan Embeddings                |
 | **Vector Database** | Amazon OpenSearch Serverless (NextGen) |
 
-## Notes
+## Success Criteria
 
 This experiment builds on the validated OpenSearch Serverless NextGen environment established in **05-opensearch-serverless-nextgen**.
 
-In addition to implementing the retrieval pipeline, the experiment evaluated retrieval quality using a reusable benchmark dataset.
+| Check                                                              | Status |
+| ------------------------------------------------------------------ | ------ |
+| Retrieval pipeline implemented using OpenSearch Serverless NextGen | ✅     |
+| Retrieval quality evaluated using a benchmark dataset              | ✅     |
 
 ## Key Learnings
 
