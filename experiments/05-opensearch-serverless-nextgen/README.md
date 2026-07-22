@@ -31,16 +31,15 @@ Validate that an idle NextGen Vector Search collection:
 
 ## Results
 
-| Check                    | Status           |
-| ------------------------ | ---------------- |
-| Collection created       | ✅               |
-| NextGen deployment       | ✅               |
-| Collection Group created | ✅               |
-| Minimum Search OCU = 0   | ✅               |
-| Minimum Indexing OCU = 0 | ✅               |
-| SearchOCU = 0            | ✅               |
-| IndexingOCU = 0          | ✅               |
-| Idle compute charges     | ✅ None observed |
+| Check                                | Status           |
+| ------------------------------------ | ---------------- |
+| NextGen collection created           | ✅               |
+| Collection Group created             | ✅               |
+| Minimum Search OCU configured as 0   | ✅               |
+| Minimum Indexing OCU configured as 0 | ✅               |
+| Search OCU reached 0 during idle     | ✅               |
+| Indexing OCU reached 0 during idle   | ✅               |
+| Idle compute charges                 | ✅ None observed |
 
 ## Conclusion
 
