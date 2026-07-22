@@ -17,16 +17,12 @@ The implementation follows the core RAG workflow:
 5. Context retrieval
 6. LLM response generation
 
-## Outcome
+## Success Criteria
 
-- Working RAG pipeline implemented in Python.
-- Deferred vector databases and agent frameworks to later experiments.
-- Established a baseline implementation for subsequent experiments on chunking, evaluation, and OpenSearch.
-
-## Capabilities
-
-- User can ask questions about the document corpus.
-- Relevant document chunks are retrieved.
-- Retrieved context is included in the prompt.
-- Generated answers are grounded in the retrieved content.
-- End-to-end workflow can be demonstrated from the command line.
+| Check                                                      | Status |
+| ---------------------------------------------------------- | ------ |
+| User can ask questions about the document corpus           | ✅     |
+| Relevant document chunks retrieved                         | ✅     |
+| Retrieved context included in the LLM prompt               | ✅     |
+| Responses grounded in the retrieved content                | ✅     |
+| End-to-end RAG workflow demonstrated from the command line | ✅     |
