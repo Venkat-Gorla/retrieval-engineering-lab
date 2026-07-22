@@ -15,15 +15,6 @@ Develop a production-oriented understanding of vector indexing through:
 - Vector similarity search
 - Retrieval quality evaluation
 
-## Technology Stack
-
-| Component           | Technology                             |
-| ------------------- | -------------------------------------- |
-| **Language**        | Python                                 |
-| **LLM Platform**    | Amazon Bedrock                         |
-| **Embedding Model** | Amazon Titan Embeddings                |
-| **Vector Database** | Amazon OpenSearch Serverless (NextGen) |
-
 ## Success Criteria
 
 This experiment builds on the validated OpenSearch Serverless NextGen environment established in **05-opensearch-serverless-nextgen**.
@@ -38,3 +29,12 @@ This experiment builds on the validated OpenSearch Serverless NextGen environmen
 - Stable document identifiers simplify retrieval evaluation across backends.
 - OpenSearch Serverless NextGen scales to zero but introduces observable cold-start latency after idle periods.
 - A reusable evaluation dataset makes retrieval quality measurable rather than anecdotal.
+
+## Tech Stack
+
+| Component           | Technology                             |
+| ------------------- | -------------------------------------- |
+| **Language**        | Python                                 |
+| **LLM Platform**    | Amazon Bedrock                         |
+| **Embedding Model** | Amazon Titan Embeddings                |
+| **Vector Database** | Amazon OpenSearch Serverless (NextGen) |
