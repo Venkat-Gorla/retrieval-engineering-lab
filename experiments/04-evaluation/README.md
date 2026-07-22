@@ -8,10 +8,12 @@ Retrieval systems require objective measurements to determine whether changes im
 
 Understand how to evaluate semantic retrieval using a benchmark dataset and standard information retrieval metrics.
 
-## Experiments Performed
+## Success Criteria
 
-- Build a reusable benchmark dataset
-- Measure retrieval quality using Accuracy@1, Precision@K, and Recall@K
+| Check                                                                  | Status |
+| ---------------------------------------------------------------------- | ------ |
+| Reusable benchmark dataset created                                     | ✅     |
+| Retrieval quality measured using Accuracy@1, Precision@K, and Recall@K | ✅     |
 
 ## Key Takeaways
 
