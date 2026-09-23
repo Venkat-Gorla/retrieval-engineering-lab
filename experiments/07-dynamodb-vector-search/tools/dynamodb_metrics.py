@@ -8,7 +8,6 @@ import boto3
 
 
 NAMESPACE = "AWS/DynamoDB"
-TABLE_NAME = "dynamodb-vector-search"
 
 
 INTERESTING_METRICS = {
@@ -49,13 +48,13 @@ def main() -> None:
     }
 
     print(f"\nPrinting {NAMESPACE} metric names:")
-    print("=" * 45)
+    print("=" * 40)
 
     for name in sorted(unique_metric_names):
         print(name)
 
     print("\nPrinting dimensions for selected metrics:")
-    print("=" * 45)
+    print("=" * 40)
 
     for metric_name in sorted(INTERESTING_METRICS):
         print_metric_dimensions(metrics, metric_name)
