@@ -14,11 +14,6 @@ TABLE_NAME = "dynamodb-vector-search"
 INTERESTING_METRICS = {
     "ConsumedReadCapacityUnits",
     "ConsumedWriteCapacityUnits",
-    "SuccessfulRequestLatency",
-    "ReturnedItemCount",
-    "OnlineIndexConsumedWriteCapacity",
-    "OnlineIndexPercentageProgress",
-    "OnlineIndexThrottleEvents",
 }
 
 
