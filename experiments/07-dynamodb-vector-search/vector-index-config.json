@@ -1,0 +1,21 @@
+[
+  {
+    "Create": {
+      "IndexName": "DocumentEmbeddingIndex",
+      "VectorAttribute": {
+        "AttributeName": "embedding"
+      },
+      "Dimensions": 1024,
+      "DistanceFunction": "COSINE",
+      "SearchSchema": [
+        {
+          "AttributeName": "source",
+          "SearchSchemaElementType": "INLINE_FILTER"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      }
+    }
+  }
+]

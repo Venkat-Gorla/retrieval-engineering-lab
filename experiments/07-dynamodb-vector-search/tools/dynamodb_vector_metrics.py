@@ -8,7 +8,7 @@ from datetime import UTC, datetime, timedelta
 import boto3
 
 
-TABLE_NAME = "dynamodb-vector-search"
+TABLE_NAME = "retrieval-lab-ddb-vector-search-documents"
 NAMESPACE = "AWS/DynamoDB"
 
 

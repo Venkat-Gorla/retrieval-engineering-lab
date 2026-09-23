@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: DynamoDB Vector Search experiment
+
+Parameters:
+  ProjectPrefix:
+    Type: String
+    Default: retrieval-lab-ddb-vector-search
+
+Resources:
+  EvaluationDocumentsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "${ProjectPrefix}-documents"
+      BillingMode: PAY_PER_REQUEST
+
+      AttributeDefinitions:
+        - AttributeName: documentId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: documentId
+          KeyType: HASH
+
+Outputs:
+  EvaluationDocumentsTableName:
+    Description: Name of the evaluation documents table
+    Value: !Ref EvaluationDocumentsTable
