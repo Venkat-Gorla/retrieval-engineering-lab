@@ -1,0 +1,12 @@
+- update AWS CLI to the latest version:
+winget upgrade --id Amazon.AWSCLI
+
+- check current version:
+aws --version
+
+- dynamodb create vector index
+aws dynamodb update-table --table-name retrieval-lab-ddb-vector-search-documents --attribute-definitions AttributeName=documentId,AttributeType=S AttributeName=source,AttributeType=S --vector-index-updates file://vector-index-config.json
+
+- How to verify success:
+aws dynamodb describe-table --table-name retrieval-lab-ddb-vector-search-documents
+
