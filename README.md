@@ -30,4 +30,4 @@ Each lab follows the same general pattern:
 | **Document Chunking**                   | Chunking strategies for retrieval                   |
 | **Retrieval Evaluation**                | Benchmark datasets and retrieval metrics            |
 | **Vector Indexing**                     | Schema design, metadata, semantic search            |
-| **DynamoDB Vector Search**              | Evaluating DynamoDB as a vector retrieval backend   |
+| **DynamoDB Vector Search**              | Retrieval evaluation using DynamoDB                 |
