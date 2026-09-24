@@ -1,0 +1,36 @@
+DynamoDB Vector Search Evaluation
+=================================
+
+Date: 2026-09-24
+
+Dataset:
+- 20 AWS service documents
+- 11 evaluation queries
+
+Configuration:
+- Embedding model: amazon.titan-embed-text-v2:0
+- Dimensions: 1024
+- Distance function: COSINE
+- Top-K: 4
+- Vector index: DocumentEmbeddingIndex
+
+Results:
+- Accuracy@1: 100% (11/11)
+- All 11 evaluation cases passed
+- Precision@4: 10/11 cases at 25%; multi-document case at 75%
+- Recall@4: 10/11 cases at 100%; multi-document case at 75%
+
+Multi-document storage case:
+Expected: s3, ebs, efs, fsx
+Retrieved: ebs, s3, efs, ec2
+Precision@4: 75%
+Recall@4: 75%
+
+Observation:
+DynamoDB Vector Search retrieved the expected document at rank 1
+for all evaluated queries.
+
+Scope:
+This result applies to this dataset, query set, embedding configuration,
+and Top-K setting. It does not establish performance, cost, or scalability
+relative to OpenSearch Serverless.
