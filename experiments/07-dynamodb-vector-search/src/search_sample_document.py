@@ -13,15 +13,20 @@ INDEX_NAME = "DocumentEmbeddingIndex"
 QUERY_TEXT = "How does Amazon S3 hold data?"
 
 
-def search_vector_index(dynamodb, query_embedding: list[float]) -> dict:
+def search_vector_index(
+    dynamodb,
+    query_embedding: list[float],
+    doc_source: str = "manual",
+    top_k: int = 3,
+) -> dict:
     response = dynamodb.search_vectors(
         TableName=TABLE_NAME,
         IndexName=INDEX_NAME,
         SearchVector=[{"N": str(val)} for val in query_embedding],
-        TopK=3,
+        TopK=top_k,
         SearchConditionExpression="#src = :source_val",
         ExpressionAttributeNames={"#src": "source"},
-        ExpressionAttributeValues={":source_val": {"S": "manual"}},
+        ExpressionAttributeValues={":source_val": {"S": doc_source}},
         ReturnConsumedCapacity="INDEXES",
     )
 
