@@ -32,13 +32,15 @@ def print_search_results(results: list[dict]) -> None:
 
     for match in results:
         item = match["Item"]
-        score = match.get("Score", "N/A")
+        distance = match["Score"]
+
         doc_id = item["documentId"]["S"]
         text = item["text"]["S"]
         source = item["source"]["S"]
 
         print(
-            f"\n[Score: {score:.6f}] Document ID: {doc_id} (Source: {source})"
+            f"\n[Distance: {distance:.6f}] "
+            f"Document ID: {doc_id} (Source: {source})"
         )
         print(f"Text: {text}")
 
