@@ -6,7 +6,6 @@ import boto3
 from common.embeddings import get_embedding
 from models import EMBEDDING_MODEL_ID
 
-
 TABLE_NAME = "retrieval-lab-ddb-vector-search-documents"
 
 documents = [
