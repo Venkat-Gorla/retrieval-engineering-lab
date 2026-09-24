@@ -4,10 +4,6 @@ This repository is a collection of focused experiments exploring the core compon
 
 Rather than building a complete application, each experiment validates a specific retrieval engineering concept through implementation and hands-on evaluation.
 
-## Why This Exists
-
-Effective retrieval systems are built by understanding the behavior of each component in the retrieval pipeline.
-
 Each experiment is intentionally scoped as a proof of concept while emphasizing production-oriented engineering practices, clear documentation, and measurable outcomes.
 
 ## Reading Guide
