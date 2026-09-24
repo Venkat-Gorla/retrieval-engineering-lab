@@ -13,21 +13,26 @@ INDEX_NAME = "DocumentEmbeddingIndex"
 QUERY_TEXT = "How does Amazon S3 hold data?"
 
 
-def search_vector_index(dynamodb, query_embedding: list[float]) -> list[dict]:
+def search_vector_index(dynamodb, query_embedding: list[float]) -> dict:
     response = dynamodb.search_vectors(
         TableName=TABLE_NAME,
         IndexName=INDEX_NAME,
-        SearchVector=[{"N": (str(val))} for val in query_embedding],
+        SearchVector=[{"N": str(val)} for val in query_embedding],
         TopK=3,
         SearchConditionExpression="#src = :source_val",
         ExpressionAttributeNames={"#src": "source"},
         ExpressionAttributeValues={":source_val": {"S": "manual"}},
+        ReturnConsumedCapacity="INDEXES",
     )
 
-    return response["SearchResults"]
+    return response
 
 
 def print_search_results(results: list[dict]) -> None:
+    if not results:
+        print("No matching documents found.")
+        return
+
     print(f"\nFound {len(results)} matching document(s):")
 
     for match in results:
@@ -57,12 +62,14 @@ def main() -> None:
     )
 
     print(f"Searching vector index '{INDEX_NAME}' in '{TABLE_NAME}'...")
-    results = search_vector_index(dynamodb, query_embedding)
+    response = search_vector_index(dynamodb, query_embedding)
 
-    if not results:
-        print("No matching documents found.")
-        return
+    consumed = response.get("ConsumedCapacity", {})
+    print(
+        f"\nVectorSearchRequestBytes: {consumed.get('VectorSearchRequestBytes')}"
+    )
 
+    results = response["SearchResults"]
     print_search_results(results)
 
 
