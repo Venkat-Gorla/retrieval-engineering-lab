@@ -37,7 +37,7 @@ def retrieve(
         doc_id = item["documentId"]["S"]
         source = item["source"]["S"]
 
-        assert (source == "evaluation"), "Non-evaluation document returned."
+        assert source == "evaluation", "Non-evaluation document returned."
 
         document_ids.append(doc_id)
 
