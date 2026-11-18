@@ -27,3 +27,4 @@ Each lab follows the same general pattern:
 | **Retrieval Evaluation**                | Benchmark datasets and retrieval metrics            |
 | **Vector Indexing**                     | Schema design, metadata, semantic search            |
 | **DynamoDB Vector Search**              | Retrieval evaluation using DynamoDB                 |
+| **S3 Vector Search**                    | Retrieval evaluation using S3                       |
