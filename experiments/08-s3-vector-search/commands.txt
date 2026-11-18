@@ -1,0 +1,41 @@
+Bucket name:
+retrieval-lab-s3-vector-documents
+
+Index name: 
+document-embedding-index
+
+----------------------------------------
+Note: the commands are separated into multi-line for readability.
+On Windows, they should be run as single line commands.
+
+- Verify the vector bucket
+aws s3vectors get-vector-bucket 
+  --vector-bucket-name retrieval-lab-s3-vector-documents 
+  --region ap-south-1
+
+- Verify the index exists
+aws s3vectors list-indexes 
+  --vector-bucket-name retrieval-lab-s3-vector-documents 
+  --region ap-south-1
+
+- Inspect the index configuration
+aws s3vectors get-index --vector-bucket-name retrieval-lab-s3-vector-documents 
+  --index-name document-embedding-index 
+  --region ap-south-1
+
+Output snippet:
+{
+    "index": {
+        "vectorBucketName": "retrieval-lab-s3-vector-documents",
+        "indexName": "document-embedding-index",
+        "dataType": "float32",
+        "dimension": 1024,
+        "distanceMetric": "cosine",
+        "metadataConfiguration": {
+            "nonFilterableMetadataKeys": [
+                "text"
+            ]
+        }
+    }
+}
+
