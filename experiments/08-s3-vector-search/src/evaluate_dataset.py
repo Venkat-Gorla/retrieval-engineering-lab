@@ -23,7 +23,21 @@ def retrieve(
     s3vectors_client,
     query_embedding: list[float],
 ) -> list[str]:
+    response = search_vector_index(
+        s3vectors_client=s3vectors_client,
+        query_embedding=query_embedding,
+        doc_source="evaluation",
+        top_k=TOP_K,
+    )
+
     document_ids = []
+    for vector in response["vectors"]:
+        doc_id = vector["key"]
+        source = vector["metadata"]["source"]
+
+        assert source == "evaluation", "Non-evaluation document returned."
+
+        document_ids.append(doc_id)
 
     return document_ids
 
