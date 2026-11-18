@@ -1,3 +1,6 @@
+Note: the commands are separated into multi-line for readability.
+On Windows, they should be run as single line commands.
+
 - update AWS CLI to the latest version:
 winget upgrade --id Amazon.AWSCLI
 
@@ -5,7 +8,10 @@ winget upgrade --id Amazon.AWSCLI
 aws --version
 
 - dynamodb create vector index
-aws dynamodb update-table --table-name retrieval-lab-ddb-vector-search-documents --attribute-definitions AttributeName=documentId,AttributeType=S AttributeName=source,AttributeType=S --vector-index-updates file://vector-index-config.json
+aws dynamodb update-table --table-name retrieval-lab-ddb-vector-search-documents 
+  --attribute-definitions AttributeName=documentId,AttributeType=S 
+  AttributeName=source,AttributeType=S 
+  --vector-index-updates file://vector-index-config.json
 
 - How to verify success:
 aws dynamodb describe-table --table-name retrieval-lab-ddb-vector-search-documents
